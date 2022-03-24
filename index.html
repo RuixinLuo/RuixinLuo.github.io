@@ -32,7 +32,119 @@
 
   
 
-<meta name="generator" content="Hexo 6.1.0"></head>
+<meta name="generator" content="Hexo 6.1.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body>
   <div id="container" q-class="show:isCtnShow">
@@ -155,68 +267,33 @@
     <article id="post-TDCAandTRCA" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/24/TDCAandTRCA/">任务相关成分分析TRCA与任务判别模式分析TDCA的推导比较</a>
+    </h1>
+  
+
+        
+        <a href="/2022/03/24/TDCAandTRCA/" class="archive-article-date">
+  	<time datetime="2022-03-24T02:39:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-24</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="任务相关成分分析trca与任务判别模式分析tdca的推导比较">任务相关成分分析TRCA与任务判别模式分析TDCA的推导比较</h1>
 <h2 id="背景知识">背景知识</h2>
 <ul>
-<li>基于稳态视觉诱发电位（Steady-State Visual Evoked Potential, SSVEP）的脑-机接口系统（Brain-Computer Interface, BCI）具有高信噪比、高信息传输速率、用户所需训练时间少的优势，因此受到了广泛的关注。</li>
-<li>2018年，Nakanishi M等人首次将任务相关成分算法（task-related component analysis, TRCA）应用到SSVEP信号的分类识别之中，基于该算法所设计的在线系统的信息传输率可以达到325.33±38.17bits/min[1]。</li>
-<li>2021年，Liu等人首次利用了判别式模型来增强SSVEP-BCI系统的识别性能，提出了任务判别成分分析（Task-Discriminant Component Analysis，TDCA），性能显著优于TRCA[2]。</li>
-<li>在文献[2]中的附录中，推导了TRCA生成式模型与TDCA判别式模型的区别，在本博客中，尝试依据文献中思路对推导过程进行细化，便于研究人员理解和学习。本人能力水平有限，若有问题和错误，敬请指正~</li>
-</ul>
-<blockquote>
-<p>[1]Nakanishi M, Wang Y, Chen X, et al. Enhancing detection of SSVEPs for a high-speed brain speller using Task-Related Component Analysis [J]. IEEE Transactions on Biomedical Engineering, 2018, 65(1): 104-112.</p>
-</blockquote>
-<blockquote>
-<p>[2]Liu B, Chen X, Shi N, et al.Improving the performance of individually calibrated ssvep-bci by task- discriminant component analysis[J]. IEEE Transaction on Neural Systems Rehabilitation Engineering, 2021,29:1998-2007.</p>
-</blockquote>
-<h2 id="基本原理与假设">基本原理与假设</h2>
-<p>基于模型X=S+N，其中X为单试次的SSVEP观测信号，S为确定的任务信号、N为随机噪声 假设：S与N不相关，不同试次的N不相关，不同类别<span class="math inline">\(\mathbf{S}_{i}\text{与}\mathbf{S}_{j}\)</span>不相关</p>
-<h2 id="任务相关成分分析trca">任务相关成分分析（TRCA）</h2>
-<p>TRCA的构建目标是使得相同任务下、各试次脑电信号的相关性最大，其优化目标可以表示为： <span class="math display">\[
-\max \frac{w^{T} S w}{w^{T} Q w} \text { 其中 } S=\sum_{h_{1}, h_{2}=1, h_{1} \neq h_{2}}^{N_{t}} X^{\left(h_{1}\right)} X^{\left(h_{2}\right) T}, Q=\sum_{h=1}^{N_{t}} X^{(h)} X^{(h) T}
-\]</span> 式中h1、h2代表不同的试次，Nt代表总试次数，X为单试次信号（维度：导联Nc*时间点Ns） 由假设可得： <span class="math display">\[
-\begin{gathered}
-\boldsymbol{X}^{\left(h_{1}\right)} \boldsymbol{X}^{\left(h_{2}\right) \boldsymbol{T}}=\left(\boldsymbol{S}^{\left(h_{1}\right)}+\boldsymbol{N}^{\left(h_{1}\right)}\right)\left(\boldsymbol{S}^{\left(h_{2}\right)}+\boldsymbol{N}^{\left(h_{2}\right)}\right)^{T}=\boldsymbol{S}^{\left(h_{1}\right)} \boldsymbol{S}^{\left(h_{2}\right) \boldsymbol{T}} \\
-\boldsymbol{X}^{(h)} \boldsymbol{X}^{(h) T}=\left(\boldsymbol{S}^{(h)}+\boldsymbol{N}^{(h)}\right)\left(\boldsymbol{S}^{(h)}+\boldsymbol{N}^{(h)}\right)^{T}=\boldsymbol{S}^{(h)} \boldsymbol{S}^{(h) T}+\boldsymbol{N}^{(h)} \boldsymbol{N}^{(h) T}
-\end{gathered}
-\]</span> 因此， <span class="math display">\[
-\begin{aligned}
-&amp;\boldsymbol{S}=\sum_{h_{1}, h_{2}=1}^{N_{t}} \boldsymbol{X}^{\left(h_{1}\right)} \boldsymbol{X}^{\left(h_{2}\right) T}-\sum_{h=1}^{N_{t}} \boldsymbol{X}^{(h)} \boldsymbol{X}^{(h) T}\\
-&amp;=\sum_{h_{1}, h_{2}=1}^{N_{t}} S^{\left(h_{1}\right)} S^{\left(h_{2}\right) T}-\sum_{h=1}^{N_{t}}\left(S^{(h)} S^{(h) T}+N^{(h)} N^{(h) T}\right)\\
-&amp;=2 \boldsymbol{S S}^{T}-\left(\boldsymbol{S S}^{T}+\boldsymbol{N} \boldsymbol{N}^{T}\right)=\boldsymbol{S S}^{T}-\boldsymbol{N}^{T}\\
-&amp;\boldsymbol{Q}=\sum_{h=1}^{N_{t}} \boldsymbol{X}^{(h)} \boldsymbol{X}^{(h) T}\\
-&amp;=\boldsymbol{S S}^{T}+\boldsymbol{N} \boldsymbol{N}^{T}
-\end{aligned}
-\]</span> 即，原优化目标可以简化为： <span class="math display">\[
-\begin{aligned}
-&amp;\max \frac{\boldsymbol{w}^{T} S w}{w^{T} Q w}=\max \frac{w^{T}\left(S S^{T}-N N^{T}\right) w}{w^{T}\left(S S^{T}+N N^{T}\right) w}=\max \left(1-\frac{2 w^{T}\left(N N^{T}\right) w}{w^{T}\left(S S^{T}+N N^{T}\right) w}\right) \\
-&amp;=\max \frac{w^{T}\left(S S^{T}+N N^{T}\right) w}{w^{T} N N^{T} w}=\max \frac{w^{T} S S^{T} w}{w^{T} N N^{T} w}
-\end{aligned}
-\]</span></p>
-<h2 id="任务判别模式分析tdca">任务判别模式分析（TDCA）</h2>
-<p>TDCA的构建目标是最大化类间差异、最小化类内差异，其优化目标表示为： <span class="math display">\[
-\max \frac{w^{T} S_{b} w}{w^{T} S_{w} w} \text { 其中 } S_{b}=\sum_{i=1}^{N_{f}}\left(\overline{X_{i}}-\bar{X}\right)\left(\overline{X_{i}}-\bar{X}\right)^{T}, S_{w}=\sum_{i=1}^{N_{f}} \sum_{h=1}^{N_{t}}\left(X_{i}^{(h)}-X_{i}\right)\left(X_{i}^{(h)}-X_{i}\right)^{T}
-\]</span> 其中，Nf代表总类别数 由假设可以推导出： <span class="math display">\[
-\begin{aligned}
-&amp;S_{b}=\sum_{i=1}^{N_{f}}\left(S_{i}-\frac{1}{N_{f}} \sum_{j=1}^{N_{f}} S_{j}\right)\left(S_{i}-\frac{1}{N_{f}} \sum_{j=1}^{N_{f}} S_{j}\right)^{T} \\
-&amp;=\sum_{i=1}^{N_{f}}\left[S_{i} S_{i}^{T}-\frac{1}{N_{f}}\left(\sum_{j=1}^{N_{f}} S_{j}\right) S_{i}^{T}-\frac{1}{N_{f}} S_{i}\left(\sum_{j=1}^{N_{f}} S_{j}^{T}\right)+\frac{1}{N_{f}^{2}}\left(\sum_{j=1}^{N_{f}} S_{j}\right)\left(\sum_{k=1}^{N_{f}} S_{k}^{T}\right)\right] \\
-&amp;=\sum_{i=1}^{N_{f}}\left[S_{i} S_{i}^{T}-\frac{2}{N_{f}} S_{i} S_{i}^{T}+\frac{1}{N_{f}^{2}} \sum_{j=1}^{N_{f}} S_{j} S_{j}^{T}\right] \\
-&amp;=\partial \sum_{i=1}^{N_{f}} S_{i} S_{i}^{T} \\
-&amp;S_{w}=\sum_{i=1}^{N_{f}} \sum_{h=1}^{N_{t}}\left(X_{i}^{(h)}-X_{i}\right)\left(X_{i}^{(h)}-X_{i}\right)^{T} \\
-&amp;=\sum_{i=1}^{N_{f}} \sum_{h=1}^{N_{t}} N_{i}^{(h)} N_{i}^{(h)^{T}} \\
-&amp;=\beta N N^{T}
-\end{aligned}
-\]</span> 即有： <span class="math display">\[
-\max \frac{w^{T} S_{b} w}{w^{T} S_{w} w}=\max \frac{w^{T} \sum_{i=1}^{N_{f}} S_{i} S_{i}^{T} w}{w^{T} N N^{T} w}
-\]</span> ## 总结 观察化简后的优化目标可以发现： - TRCA最大化单一频率的信噪比，TDCA最大化所有频率的信噪比 - TDCA为多类的空间滤波器提供了一种集成方式</p>
-<h2 id="联系我">联系我</h2>
-<ul>
-<li>email: ruixin_luo@tju.edu.cn</li>
-</ul>
-<p>&lt; ! - -more- - &gt;</p>
-
+<li><p>基于稳态视觉诱发电位（Steady-State Visual Evoked Potential, SSVEP）的脑-机接口系统（Brain-Computer Interface, BCI）具有高信噪比、高信息传输速率、用户所需训练时间少的优势，因此受到了广泛的关注。</p></li>
+<li><p>2018年，Nakanishi M等人首次将任务相关成分算法（task-related component analysis, TRCA）应用到SSVEP信号的分类识别之中，基于该算法所设计的在线系统的信息传输率可以达到325.33±38.17bits/min[1]。</p></li>
+<li><p>2021年，Liu等人首次利用了判别式模型来增强SSVEP-BCI系统的识别性能，提出了任务判别成分分析（Task-Discriminant Component Analysis，TDCA），性能显著优于TRCA[2]。</p></li>
+<li><p>在文献[2]中的附录中，推导了TRCA生成式模型与TDCA判别式模型的区别，在本博客中，尝试依据文献中思路对推导过程进行细化，便于研究人员理解和学习。本人能力水平有限，若有问题和错误，敬请指正~</p>
+        
+          <a class="article-more-a" href="/2022/03/24/TDCAandTRCA/#more">more >></a>
+        
       
 
       
@@ -258,40 +335,38 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-README" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/24/hello-world/">Hello World</a>
+      <a class="article-title" href="/2022/03/24/README/">README</a>
     </h1>
   
 
         
-        <a href="/2022/03/24/hello-world/" class="archive-article-date">
-  	<time datetime="2022-03-24T07:39:04.719Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-24</time>
+        <a href="/2022/03/24/README/" class="archive-article-date">
+  	<time datetime="2022-03-24T02:39:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h2 id="welcome-to-ruixinluos-github">Welcome to RuixinLuo's github!</h2>
+<h3 id="关于我">关于我</h3>
+<ul>
+<li><p>一个微博Vlog博主 <span class="citation" data-cites="粪坑猪LRX已黑化">@粪坑猪LRX已黑化</span>-</p></li>
+<li><p>座右铭："越努力越幸运</p></li>
+<li><p>头脑简单、四肢也不发达</p></li>
+<li><p>用于记录自己的研究生日常 欢迎大家关注~</p></li>
+</ul>
+<h3 id="联系我">联系我</h3>
+<ul>
+<li>email: ruixin_luo@tju.edu.cn</li>
+</ul>
 
       
 
@@ -304,7 +379,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/24/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/03/24/README/">展开全文 >></a>
         </p>
       
 
